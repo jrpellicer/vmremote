@@ -24,7 +24,7 @@ Se debe comprobar previamente la conexión por ssh mediante clave privada desde 
 
 # ansible
 
-## Requerimientos
+## Requerimientos para ansible
 
 Instalación de `pipx`:
 
@@ -70,12 +70,14 @@ La configuración se hace dentro del directorio del repositorio.
 
 ### Comprobación del funcionamiento
 ```zsh
-ansible all -m ping -u usuario
+ansible all -m ping
 ```
+
+# Lanzamiento del proceso
 
 ## Variables para la creación de las máquinas
 
-En el playbook hay qye definir las siguientes variables por cada máquina virtual a crear:
+En el playbook hay que definir las siguientes variables por cada máquina virtual a crear:
 
 * `vdi_file` nombre y ubicación del fichero `.vdi` de la máquina a crear. La ruta será `./discos/`
 * `remote_dir` directorio remoto de la máquina host donse se copiará el fichero `.vdi`
@@ -83,10 +85,9 @@ En el playbook hay qye definir las siguientes variables por cada máquina virtua
 * `vm_name` nombre de la máquina virtual a crear.
 * `os_type` tipo de sistema operativo de la VM: `Windows11_64`, `Windows2019_64`, `Ubuntu24_LTS_64`, `Ubuntu_64`
 
-# Ejecución del playbook
+## Ejecución del playbook
 
-  434  ansible all -m ping -u ciclot
-  435  nano hosts.cfg
-  436  ansible all -m ping
-  437  ansible-playbook playbook.yml
+```zsh
+ansible-playbook playbook.yml
+```
 
