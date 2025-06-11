@@ -13,14 +13,13 @@ Para el funcionamiento es necesario tener instalado los siguienmtes programas.
 En la máquina servidor:
 * `ansible`
 * `python`
-* `pipx` (recomendado) o `pip`
+* Para la instalación de `ansible`: `pipx` (recomendado) o `pip`
 
 Los hosts clientes deben ser máquinas Linux con los siguientes programas instalados:
 * `openssh-server`
 * `python`
-* virtualbox
+* `virtualbox`
 
-Se debe comprobar previamente la conexión por ssh mediante clave privada desde el servidor a todos los hosts.
 
 # ansible
 
@@ -55,7 +54,7 @@ A cada máquina cliente que tengamos se le copiará, si no se ha hecho ya, la cl
 ssh-copy-id usuario@11.22.33.44
 ```
 
-Se comprueba la conexión una por una. Paso necesario.
+Se comprueba la conexión una por una. **Paso necesario.**
 
 ```zsh
 ssh usuario@11.22.33.44
