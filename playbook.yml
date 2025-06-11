@@ -1,0 +1,31 @@
+---
+- name: Desplegar VM en múltiples máquinas con VirtualBox
+  hosts: clientes
+  vars:
+    vdi_file: "discos/Windows Server 2019.vdi"
+    remote_dir: "/home/{{ ansible_user }}/Discos_Examen"
+    remote_vdi_path: "{{ remote_dir }}/Windows Server 2019.vdi"
+    vm_name: "Win2019-VM"
+    # Define el tipo de sistema operativo para la VM: Windows11_64   Windows2019_64   Ubuntu24_LTS_64   Ubuntu_64
+    os_type: "Windows2019_64"
+
+  tasks:
+    - name: Crear carpeta para la VM en la máquina remota
+      file:
+        path: "{{ remote_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Copiar el archivo VDI a las máquinas remotas
+      copy:
+        src: "./{{ vdi_file }}"
+        dest: "{{ remote_vdi_path }}"
+        mode: '0664'
+
+    - name: Ejecutar el script de creación de la VM
+      ansible.builtin.script: ./scripts/crear_vm.sh "{{ vm_name }}" "{{ os_type }}" "{{ remote_vdi_path }}"
+
+  strategy: free
+  max_fail_percentage: 100
+  forks: 10
+
